@@ -2,208 +2,496 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¡Feliz Cumpleaños Mamá! ❤️</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Feliz Cumpleaños, Papá Mecánico 🔧</title>
     <style>
-        body {
+        * {
             margin: 0;
             padding: 0;
-            overflow: hidden;
-            background-color: black;
-            font-family: 'Arial', sans-serif;
+            box-sizing: border-box;
         }
-        
-        #binary-rain {
+
+        body {
+            background: radial-gradient(circle at center, #0a1f2e, #010a10);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', 'Arial', 'Impact', monospace;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Fondo de taller animado con herramientas y engranajes */
+        .workshop-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            opacity: 0.35;
+            pointer-events: none;
+        }
+
+        .gear, .wrench, .tire {
+            position: absolute;
+            font-size: 40px;
+            user-select: none;
+            opacity: 0.5;
+            animation: floatSlow linear infinite;
+        }
+
+        @keyframes floatSlow {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.5; }
+            90% { opacity: 0.5; }
+            100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Contenedor principal del mensaje */
+        .main-card {
+            position: relative;
+            z-index: 20;
+            text-align: center;
+            background: rgba(0, 30, 40, 0.65);
+            backdrop-filter: blur(12px);
+            border-radius: 60px 60px 80px 80px;
+            padding: 2.5rem 3.5rem;
+            border: 2px solid rgba(0, 206, 209, 0.7);
+            box-shadow: 0 0 50px rgba(0, 206, 209, 0.3), inset 0 0 20px rgba(0, 255, 255, 0.2);
+            animation: glowPulse 3s infinite ease-in-out;
+            margin: 20px;
+        }
+
+        @keyframes glowPulse {
+            0% { box-shadow: 0 0 20px rgba(0, 206, 209, 0.3), inset 0 0 10px rgba(0, 255, 255, 0.1); border-color: #00ced1aa; }
+            50% { box-shadow: 0 0 70px rgba(30, 144, 255, 0.7), inset 0 0 35px rgba(0, 206, 209, 0.4); border-color: #1E90FF; }
+            100% { box-shadow: 0 0 20px rgba(0, 206, 209, 0.3), inset 0 0 10px rgba(0, 255, 255, 0.1); border-color: #00ced1aa; }
+        }
+
+        .birthday-title {
+            font-size: 5rem;
+            font-weight: 900;
+            letter-spacing: 5px;
+            color: #00FFFF;
+            text-shadow: 0 0 15px #008b8b, 0 0 30px #1E90FF, 4px 4px 0 #003333;
+            margin-bottom: 20px;
+            animation: textZoom 1.8s ease-out;
+            font-family: 'Impact', 'Arial Black', sans-serif;
+        }
+
+        .dad-name {
+            font-size: 3rem;
+            color: #7FFFD4;
+            background: linear-gradient(135deg, #00CED1, #1E90FF);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 5px #00ced1;
+            margin-top: 0.5rem;
+            font-weight: bold;
+        }
+
+        /* Iconos mecánicos animados alrededor del mensaje */
+        .mechanic-icons {
+            display: flex;
+            justify-content: center;
+            gap: 35px;
+            margin-top: 35px;
+            flex-wrap: wrap;
+        }
+
+        .icon-item {
+            font-size: 3rem;
+            filter: drop-shadow(0 0 8px #00CED1);
+            animation: bounceIcon 2s infinite ease;
+            display: inline-block;
+        }
+
+        .icon-item:nth-child(2) { animation-delay: 0.3s; }
+        .icon-item:nth-child(3) { animation-delay: 0.6s; }
+        .icon-item:nth-child(4) { animation-delay: 0.2s; }
+
+        @keyframes bounceIcon {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-12px) scale(1.1); text-shadow: 0 0 12px cyan; }
+        }
+
+        @keyframes textZoom {
+            0% { opacity: 0; transform: scale(0.5) rotate(-8deg); letter-spacing: 15px; }
+            70% { transform: scale(1.05); }
+            100% { opacity: 1; transform: scale(1) rotate(0); letter-spacing: 5px; }
+        }
+
+        /* Lluvia binaria azul/turquesa */
+        #binaryCanvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: 1;
-        }
-        
-        .message-container {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 2;
-            text-align: center;
-            animation: fadeIn 3s ease-in-out;
-            text-shadow: 0 0 20px rgba(255, 105, 180, 0.8);
+            display: block;
             pointer-events: none;
         }
-        
-        .birthday-message {
-            font-size: 4rem;
-            color: #ff1493; /* Rosa más intenso */
-            margin: 0;
-            animation: pulse 2s infinite;
-            letter-spacing: 4px;
-            font-weight: bold;
-            line-height: 1.4;
+
+        /* Partículas tipo chispa de taller */
+        .spark {
+            position: fixed;
+            width: 6px;
+            height: 6px;
+            background: #00FFFF;
+            border-radius: 50%;
+            filter: blur(1px);
+            box-shadow: 0 0 12px #00CED1;
+            pointer-events: none;
+            z-index: 25;
+            animation: sparkFly 1.2s linear forwards;
         }
-        
-        .sub-message {
-            font-size: 2.5rem;
-            color: #ff69b4; /* Rosa medio */
-            margin-top: 20px;
-            animation: pulse 2s infinite 0.5s;
+
+        @keyframes sparkFly {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-80px) translateX(40px) scale(0); opacity: 0; }
         }
-        
-        .heart {
-            color: #ff1493;
-            font-size: 3rem;
-            animation: heartbeat 1.5s ease-in-out infinite;
-            display: inline-block;
-        }
-        
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: translate(-50%, -30%); }
-            100% { opacity: 1; transform: translate(-50%, -50%); }
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        @keyframes heartbeat {
-            0% { transform: scale(1); }
-            14% { transform: scale(1.3); }
-            28% { transform: scale(1); }
-            42% { transform: scale(1.3); }
-            70% { transform: scale(1); }
-        }
-        
+
         /* Responsive */
-        @media (max-width: 768px) {
-            .birthday-message {
-                font-size: 2.5rem;
+        @media (max-width: 680px) {
+            .birthday-title {
+                font-size: 2.8rem;
+                letter-spacing: 2px;
             }
-            .sub-message {
-                font-size: 1.8rem;
+            .dad-name {
+                font-size: 2rem;
             }
+            .mechanic-icons {
+                gap: 20px;
+            }
+            .icon-item {
+                font-size: 2.2rem;
+            }
+            .main-card {
+                padding: 1.5rem 1.8rem;
+            }
+        }
+
+        /* Volante giratorio decorativo sutil */
+        .steering-wheel {
+            position: fixed;
+            bottom: 15px;
+            right: 15px;
+            font-size: 55px;
+            opacity: 0.4;
+            z-index: 15;
+            animation: spinWheel 12s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes spinWheel {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Herramienta flotante adicional */
+        .tool {
+            position: fixed;
+            font-size: 28px;
+            pointer-events: none;
+            z-index: 10;
+            filter: drop-shadow(0 0 6px #00ced1);
+            animation: floatTool 8s linear infinite;
+        }
+
+        @keyframes floatTool {
+            0% { transform: translateX(-10vw) translateY(110vh) rotate(0deg); opacity: 0.3; }
+            20% { opacity: 0.8; }
+            80% { opacity: 0.8; }
+            100% { transform: translateX(20vw) translateY(-20vh) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
 <body>
-    <canvas id="binary-rain"></canvas>
+
+    <!-- Canvas para lluvia binaria estilo matrix pero azul/turquesa -->
+    <canvas id="binaryCanvas"></canvas>
+
+    <!-- Contenedor de fondo con temática de taller (engranajes de fondo) -->
+    <div class="workshop-bg" id="workshopBg"></div>
     
-    <div class="message-container">
-        <div class="birthday-message">
-            ¡Feliz Cumpleaños<br>Mami!
+    <!-- volante decorativo -->
+    <div class="steering-wheel">🚗⚙️</div>
+
+    <!-- Mensaje principal: SOLO feliz cumpleaños y alusión a sus gustos visuales -->
+    <div class="main-card">
+        <div class="birthday-title">
+            🎉🔥 ¡FELIZ CUMPLEAÑOS! 🔥🎉
         </div>
-        <div class="sub-message">
-            Te amo <span class="heart">❤️</span>
+        <div class="dad-name">
+            🧰  P A P Á  🧰
+        </div>
+        <div class="mechanic-icons">
+            <span class="icon-item">🔧</span>
+            <span class="icon-item">🚗</span>
+            <span class="icon-item">⚙️</span>
+            <span class="icon-item">🛠️</span>
+            <span class="icon-item">🏎️</span>
+        </div>
+        <!-- Mensaje breve sin "te amo", solo celebración mecánica -->
+        <div style="margin-top: 25px; font-size: 1.3rem; color: #9cd4e0; font-weight: bold; background: rgba(0,0,0,0.5); border-radius: 40px; padding: 8px 20px; display: inline-block;">
+            ⚡ ¡A puro motor y felicidad! ⚡
         </div>
     </div>
 
     <script>
-        const canvas = document.getElementById('binary-rain');
-        const ctx = canvas.getContext('2d');
-
-        // Ajustar tamaño del canvas
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-
-        // Caracteres binarios
-        const binaryChars = ['0', '1'];
-        
-        // Configuración de la lluvia
-        const fontSize = 20;
-        const columns = canvas.width / fontSize;
-        
-        // Array para almacenar la posición Y de cada columna
-        const drops = [];
-        for (let i = 0; i < columns; i++) {
-            drops[i] = Math.random() * -100; // Posición inicial aleatoria
-        }
-
-        // Colores rosados
-        function getRandomPinkColor() {
-            const pinkColors = [
-                'rgba(255, 182, 193, 0.9)', // Rosa claro
-                'rgba(255, 192, 203, 0.9)', // Rosa
-                'rgba(255, 105, 180, 0.9)', // Hot pink
-                'rgba(255, 20, 147, 0.9)',  // Deep pink
-                'rgba(219, 112, 147, 0.9)', // Pale violet red
-                'rgba(255, 174, 185, 0.9)', // Rosa pastel
-                'rgba(255, 130, 171, 0.9)'  // Rosa medio
-            ];
-            return pinkColors[Math.floor(Math.random() * pinkColors.length)];
-        }
-
-        // Función para dibujar la lluvia binaria
-        function drawBinaryRain() {
-            // Fondo negro con efecto de desvanecimiento
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            // Configurar estilo del texto
-            ctx.font = `bold ${fontSize}px 'Courier New', monospace`;
-
-            // Dibujar cada columna
-            for (let i = 0; i < drops.length; i++) {
-                // Carácter aleatorio (0 o 1)
-                const char = binaryChars[Math.floor(Math.random() * binaryChars.length)];
-                
-                // Color rosado aleatorio
-                ctx.fillStyle = getRandomPinkColor();
-                
-                // Dibujar el carácter
-                ctx.fillText(char, i * fontSize, drops[i] * fontSize);
-
-                // Mover la gota hacia abajo
-                drops[i]++;
-
-                // Reiniciar cuando llega al fondo (con variación aleatoria)
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
+        (function() {
+            // 1. LLUVIA BINARIA AZUL Y VERDE TURQUESA
+            const canvas = document.getElementById('binaryCanvas');
+            const ctx = canvas.getContext('2d');
+            let width, height;
+            
+            function resizeCanvas() {
+                width = window.innerWidth;
+                height = window.innerHeight;
+                canvas.width = width;
+                canvas.height = height;
+            }
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            
+            // caracteres relacionados a mecánica y binario divertido
+            const chars = ['0', '1', '🔧', '⚙', '🚗', '🛞', '0', '1', '💧', '⚡', '1', '0', '🔩'];
+            const fontSize = 24;
+            let columns = Math.ceil(width / fontSize);
+            let drops = [];
+            
+            function initDrops() {
+                columns = Math.ceil(width / fontSize);
+                drops = [];
+                for (let i = 0; i < columns; i++) {
+                    drops[i] = Math.random() * -120;
                 }
             }
-        }
-
-        // Animar la lluvia
-        setInterval(drawBinaryRain, 50);
-
-        // Efecto adicional: estrellas brillantes ocasionales
-        function createSparkle() {
-            const sparkle = document.createElement('div');
-            sparkle.style.position = 'fixed';
-            sparkle.style.left = Math.random() * 100 + '%';
-            sparkle.style.top = Math.random() * 100 + '%';
-            sparkle.style.color = '#ff69b4';
-            sparkle.style.fontSize = '10px';
-            sparkle.style.opacity = Math.random() * 0.5 + 0.3;
-            sparkle.style.zIndex = '3';
-            sparkle.style.pointerEvents = 'none';
-            sparkle.style.animation = 'fadeOut 2s forwards';
-            sparkle.innerHTML = '✨';
-            document.body.appendChild(sparkle);
+            initDrops();
             
-            setTimeout(() => {
-                sparkle.remove();
-            }, 2000);
-        }
-
-        // Crear estrellas cada 500ms
-        setInterval(createSparkle, 500);
-
-        // Añadir estilo para la animación de las estrellas
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes fadeOut {
-                0% { opacity: 1; transform: scale(1); }
-                100% { opacity: 0; transform: scale(0); }
+            // función de color azul/turquesa con variación
+            function getFluidColor() {
+                const colors = [
+                    'rgba(0, 206, 209, 0.9)',   // turquesa
+                    'rgba(64, 224, 208, 0.85)', 
+                    'rgba(30, 144, 255, 0.9)',   // azul dodger
+                    'rgba(0, 191, 255, 0.9)',
+                    'rgba(72, 209, 204, 0.9)',
+                    'rgba(135, 206, 250, 0.9)',
+                    'rgba(0, 255, 255, 0.8)'     // cyan
+                ];
+                return colors[Math.floor(Math.random() * colors.length)];
             }
-        `;
-        document.head.appendChild(style);
+            
+            function drawRain() {
+                // fondo con estela sutil
+                ctx.fillStyle = 'rgba(2, 15, 22, 0.09)';
+                ctx.fillRect(0, 0, width, height);
+                ctx.font = `bold ${fontSize}px 'Courier New', 'Segoe UI Emoji'`;
+                
+                for (let i = 0; i < drops.length; i++) {
+                    const randomChar = chars[Math.floor(Math.random() * chars.length)];
+                    ctx.fillStyle = getFluidColor();
+                    ctx.shadowBlur = 6;
+                    ctx.shadowColor = '#00CED1';
+                    ctx.fillText(randomChar, i * fontSize, drops[i] * fontSize);
+                    ctx.shadowBlur = 0;
+                    
+                    drops[i] += 0.65; // velocidad suave
+                    if (drops[i] * fontSize > height && Math.random() > 0.98) {
+                        drops[i] = 0;
+                    }
+                }
+                requestAnimationFrame(drawRain);
+            }
+            
+            drawRain();
+            
+            // Reajustar columnas al redimensionar
+            window.addEventListener('resize', () => {
+                width = window.innerWidth;
+                height = window.innerHeight;
+                canvas.width = width;
+                canvas.height = height;
+                initDrops();
+            });
+            
+            // 2. FONDO CON HERRAMIENTAS, ENGRANAJES Y VEHÍCULOS FLOTANTES DE FORMA DINÁMICA
+            const bgContainer = document.getElementById('workshopBg');
+            const toolsList = ['🔧', '⚙️', '🔩', '🔨', '🚗', '🏎️', '🛞', '⛓️', '🧰', '🛠️', '⚡', '🔰'];
+            
+            function createFloatingTool() {
+                const tool = document.createElement('div');
+                tool.className = 'tool';
+                const randomTool = toolsList[Math.floor(Math.random() * toolsList.length)];
+                tool.innerText = randomTool;
+                const size = Math.floor(Math.random() * 35) + 22; // 22px a 57px
+                tool.style.fontSize = size + 'px';
+                tool.style.left = Math.random() * 90 + '%';
+                tool.style.animationDuration = 7 + Math.random() * 8 + 's';
+                tool.style.animationDelay = Math.random() * 5 + 's';
+                tool.style.opacity = Math.random() * 0.5 + 0.2;
+                bgContainer.appendChild(tool);
+                
+                setTimeout(() => {
+                    if(tool && tool.remove) tool.remove();
+                }, 15000);
+            }
+            
+            // crear elementos flotantes cada 600ms
+            setInterval(createFloatingTool, 650);
+            for(let i=0; i<12; i++) setTimeout(createFloatingTool, i*400);
+            
+            // 3. CHISPAS / SCINTILLATIONS DE TALLER (efecto de soldadura o motor)
+            function createSpark() {
+                const spark = document.createElement('div');
+                spark.classList.add('spark');
+                const startX = Math.random() * window.innerWidth;
+                const startY = window.innerHeight - Math.random() * 80;
+                spark.style.left = startX + 'px';
+                spark.style.top = startY + 'px';
+                spark.style.width = Math.random() * 7 + 3 + 'px';
+                spark.style.height = spark.style.width;
+                spark.style.background = `radial-gradient(circle, #00FFFF, #1E90FF)`;
+                spark.style.boxShadow = `0 0 12px #00CED1`;
+                document.body.appendChild(spark);
+                
+                setTimeout(() => {
+                    spark.remove();
+                }, 1100);
+            }
+            
+            // chispas más seguido para ambiente de taller
+            setInterval(() => {
+                for(let s=0; s<2; s++) {
+                    setTimeout(createSpark, s * 100);
+                }
+            }, 800);
+            
+            // 4. efecto de "lluvia de tuercas" sutil pero sin interferir el mensaje
+            function createNutRain() {
+                const nut = document.createElement('div');
+                nut.innerText = '🔩';
+                nut.style.position = 'fixed';
+                nut.style.left = Math.random() * 100 + '%';
+                nut.style.top = '-30px';
+                nut.style.fontSize = Math.random() * 18 + 14 + 'px';
+                nut.style.color = `rgba(0, 206, 209, ${Math.random() * 0.6 + 0.3})`;
+                nut.style.zIndex = '12';
+                nut.style.pointerEvents = 'none';
+                nut.style.filter = 'drop-shadow(0 0 3px #00ced1)';
+                nut.style.animation = 'fallNut 4s linear forwards';
+                document.body.appendChild(nut);
+                
+                setTimeout(() => nut.remove(), 4000);
+            }
+            
+            // agregar animación para las tuercas que caen
+            const styleSheet = document.createElement('style');
+            styleSheet.textContent = `
+                @keyframes fallNut {
+                    0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+                    100% { transform: translateY(110vh) rotate(300deg); opacity: 0; }
+                }
+                .tool {
+                    position: fixed;
+                    font-size: 28px;
+                    pointer-events: none;
+                    z-index: 10;
+                    filter: drop-shadow(0 0 6px #00ced1);
+                    animation: floatTool 8s linear infinite;
+                }
+                @keyframes floatTool {
+                    0% { transform: translateX(-10vw) translateY(110vh) rotate(0deg); opacity: 0.3; }
+                    20% { opacity: 0.8; }
+                    80% { opacity: 0.8; }
+                    100% { transform: translateX(20vw) translateY(-20vh) rotate(360deg); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(styleSheet);
+            
+            setInterval(createNutRain, 1300);
+            
+            // 5. pequeño efecto de cambio de color en el borde del mensaje (más dinámico)
+            const card = document.querySelector('.main-card');
+            let hue = 170;
+            setInterval(() => {
+                hue = (hue + 1) % 210;
+                const turquoiseShift = `rgba(0, ${180 + Math.sin(Date.now()/800)*30}, 210, 0.7)`;
+                if(card) {
+                    card.style.borderColor = `rgba(0, 210, 210, 0.9)`;
+                    card.style.boxShadow = `0 0 45px rgba(0, ${190 + Math.sin(Date.now()/600)*30}, 210, 0.5)`;
+                }
+            }, 180);
+            
+            // 6. más elementos vehiculares aleatorios (siluetas de autos)
+            function addCarSilhouette() {
+                const carSpan = document.createElement('div');
+                carSpan.innerText = '🚗💨';
+                carSpan.style.position = 'fixed';
+                carSpan.style.bottom = '5%';
+                carSpan.style.left = '-80px';
+                carSpan.style.fontSize = '42px';
+                carSpan.style.opacity = '0.35';
+                carSpan.style.zIndex = '5';
+                carSpan.style.pointerEvents = 'none';
+                carSpan.style.animation = 'driveBy 8s linear forwards';
+                document.body.appendChild(carSpan);
+                setTimeout(() => carSpan.remove(), 8000);
+            }
+            
+            const driveStyle = document.createElement('style');
+            driveStyle.textContent = `
+                @keyframes driveBy {
+                    0% { left: -80px; opacity: 0.2; }
+                    10% { opacity: 0.5; }
+                    90% { opacity: 0.5; }
+                    100% { left: 110%; opacity: 0; }
+                }
+            `;
+            document.head.appendChild(driveStyle);
+            
+            setInterval(addCarSilhouette, 5500);
+            
+            // Botón secreto no, pero efecto de "aceleración" al hacer click? solo diversión visual
+            // hacer que aparezcan rayas de velocidad ocasionalmente
+            function speedLines() {
+                const line = document.createElement('div');
+                line.style.position = 'fixed';
+                line.style.width = '100px';
+                line.style.height = '2px';
+                line.style.background = 'linear-gradient(90deg, transparent, #00ffff, #1e90ff, transparent)';
+                line.style.left = '0%';
+                line.style.top = Math.random() * 100 + '%';
+                line.style.opacity = '0.6';
+                line.style.zIndex = '18';
+                line.style.pointerEvents = 'none';
+                line.style.animation = 'speedLine 0.8s linear forwards';
+                document.body.appendChild(line);
+                setTimeout(() => line.remove(), 800);
+            }
+            
+            const lineAnim = document.createElement('style');
+            lineAnim.textContent = `
+                @keyframes speedLine {
+                    0% { transform: translateX(-100%); opacity: 0.8; width: 60px;}
+                    100% { transform: translateX(150%); opacity: 0; width: 220px;}
+                }
+            `;
+            document.head.appendChild(lineAnim);
+            
+            setInterval(() => {
+                if(Math.random() > 0.7) speedLines();
+            }, 1700);
+            
+            // 7. Ajuste para que no haya nada del texto romántico original (eliminado por completo)
+            console.log('🎂✨ Versión especial para Papá amante de la mecánica, solo feliz cumpleaños');
+        })();
     </script>
 </body>
 </html>
