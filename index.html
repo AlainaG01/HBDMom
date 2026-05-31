@@ -1,497 +1,580 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Feliz Cumpleaños, Papi 🔧</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feliz Día de las Madres</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
-            background: radial-gradient(circle at center, #0a1f2e, #010a10);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Segoe UI', 'Arial', 'Impact', monospace;
-            overflow: hidden;
-            position: relative;
-        }
+  :root {
+    --rose: #D4877A;
+    --rose-light: #F2C4BA;
+    --rose-pale: #FDF0EC;
+    --blush: #EAC4C4;
+    --sage: #B8C4B0;
+    --cream: #FAF6F0;
+    --gold: #C9A86C;
+    --dark: #3A2A2A;
+    --muted: #8A6E6E;
+  }
 
-        /* Fondo de taller animado con herramientas y engranajes */
-        .workshop-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            overflow: hidden;
-            opacity: 0.35;
-            pointer-events: none;
-        }
+  html { scroll-behavior: smooth; }
 
-        .gear, .wrench, .tire {
-            position: absolute;
-            font-size: 40px;
-            user-select: none;
-            opacity: 0.5;
-            animation: floatSlow linear infinite;
-        }
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    overflow-x: hidden;
+  }
 
-        @keyframes floatSlow {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.5; }
-            90% { opacity: 0.5; }
-            100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
-        }
+  /* CANVAS FLORAL HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background: var(--cream);
+  }
 
-        /* Contenedor principal del mensaje */
-        .main-card {
-            position: relative;
-            z-index: 20;
-            text-align: center;
-            background: rgba(0, 30, 40, 0.65);
-            backdrop-filter: blur(12px);
-            border-radius: 60px 60px 80px 80px;
-            padding: 2.5rem 3.5rem;
-            border: 2px solid rgba(0, 206, 209, 0.7);
-            box-shadow: 0 0 50px rgba(0, 206, 209, 0.3), inset 0 0 20px rgba(0, 255, 255, 0.2);
-            animation: glowPulse 3s infinite ease-in-out;
-            margin: 20px;
-        }
+  .petals-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
 
-        @keyframes glowPulse {
-            0% { box-shadow: 0 0 20px rgba(0, 206, 209, 0.3), inset 0 0 10px rgba(0, 255, 255, 0.1); border-color: #00ced1aa; }
-            50% { box-shadow: 0 0 70px rgba(30, 144, 255, 0.7), inset 0 0 35px rgba(0, 206, 209, 0.4); border-color: #1E90FF; }
-            100% { box-shadow: 0 0 20px rgba(0, 206, 209, 0.3), inset 0 0 10px rgba(0, 255, 255, 0.1); border-color: #00ced1aa; }
-        }
+  .petal {
+    position: absolute;
+    border-radius: 50% 0 50% 0;
+    opacity: 0;
+    animation: petalFall linear infinite;
+  }
 
-        .birthday-title {
-            font-size: 5rem;
-            font-weight: 900;
-            letter-spacing: 5px;
-            color: #00FFFF;
-            text-shadow: 0 0 15px #008b8b, 0 0 30px #1E90FF, 4px 4px 0 #003333;
-            margin-bottom: 20px;
-            animation: textZoom 1.8s ease-out;
-            font-family: 'Impact', 'Arial Black', sans-serif;
-        }
+  @keyframes petalFall {
+    0%   { transform: translateY(-80px) rotate(0deg); opacity: 0; }
+    10%  { opacity: 0.6; }
+    90%  { opacity: 0.4; }
+    100% { transform: translateY(110vh) rotate(540deg); opacity: 0; }
+  }
 
-        .dad-name {
-            font-size: 3rem;
-            color: #7FFFD4;
-            background: linear-gradient(135deg, #00CED1, #1E90FF);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 5px #00ced1;
-            margin-top: 0.5rem;
-            font-weight: bold;
-        }
+  /* Gold top line */
+  .hero-line {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    animation: lineGlow 3s ease-in-out infinite alternate;
+  }
+  @keyframes lineGlow {
+    from { opacity: 0.6; }
+    to   { opacity: 1; }
+  }
 
-        /* Iconos mecánicos animados alrededor del mensaje */
-        .mechanic-icons {
-            display: flex;
-            justify-content: center;
-            gap: 35px;
-            margin-top: 35px;
-            flex-wrap: wrap;
-        }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 3rem 2rem;
+    max-width: 780px;
+  }
 
-        .icon-item {
-            font-size: 3rem;
-            filter: drop-shadow(0 0 8px #00CED1);
-            animation: bounceIcon 2s infinite ease;
-            display: inline-block;
-        }
+  .eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-weight: 200;
+    font-size: 0.75rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.8rem;
+    animation: fadeUp 1s ease 0.2s both;
+  }
 
-        .icon-item:nth-child(2) { animation-delay: 0.3s; }
-        .icon-item:nth-child(3) { animation-delay: 0.6s; }
-        .icon-item:nth-child(4) { animation-delay: 0.2s; }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(3.5rem, 9vw, 7rem);
+    line-height: 0.95;
+    color: var(--dark);
+    animation: fadeUp 1s ease 0.4s both;
+    margin-bottom: 0.4rem;
+  }
 
-        @keyframes bounceIcon {
-            0%, 100% { transform: translateY(0px) scale(1); }
-            50% { transform: translateY(-12px) scale(1.1); text-shadow: 0 0 12px cyan; }
-        }
+  .hero-title em {
+    font-style: italic;
+    color: var(--rose);
+    display: block;
+    font-size: 1.1em;
+  }
 
-        @keyframes textZoom {
-            0% { opacity: 0; transform: scale(0.5) rotate(-8deg); letter-spacing: 15px; }
-            70% { transform: scale(1.05); }
-            100% { opacity: 1; transform: scale(1) rotate(0); letter-spacing: 5px; }
-        }
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem auto;
+    animation: fadeUp 1s ease 0.6s both;
+  }
 
-        /* Lluvia binaria azul/turquesa */
-        #binaryCanvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            display: block;
-            pointer-events: none;
-        }
+  .divider-line {
+    height: 1px;
+    width: 60px;
+    background: linear-gradient(90deg, transparent, var(--rose-light));
+  }
+  .divider-line.right {
+    background: linear-gradient(90deg, var(--rose-light), transparent);
+  }
 
-        /* Partículas tipo chispa de taller */
-        .spark {
-            position: fixed;
-            width: 6px;
-            height: 6px;
-            background: #00FFFF;
-            border-radius: 50%;
-            filter: blur(1px);
-            box-shadow: 0 0 12px #00CED1;
-            pointer-events: none;
-            z-index: 25;
-            animation: sparkFly 1.2s linear forwards;
-        }
+  .divider-icon {
+    width: 24px;
+    height: 24px;
+  }
 
-        @keyframes sparkFly {
-            0% { transform: translateY(0) scale(1); opacity: 1; }
-            100% { transform: translateY(-80px) translateX(40px) scale(0); opacity: 0; }
-        }
+  .hero-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(1.2rem, 3vw, 1.7rem);
+    line-height: 1.6;
+    color: var(--muted);
+    max-width: 560px;
+    margin: 0 auto 3rem;
+    animation: fadeUp 1s ease 0.8s both;
+  }
 
-        /* Responsive */
-        @media (max-width: 680px) {
-            .birthday-title {
-                font-size: 2.8rem;
-                letter-spacing: 2px;
-            }
-            .dad-name {
-                font-size: 2rem;
-            }
-            .mechanic-icons {
-                gap: 20px;
-            }
-            .icon-item {
-                font-size: 2.2rem;
-            }
-            .main-card {
-                padding: 1.5rem 1.8rem;
-            }
-        }
+  .cta-btn {
+    display: inline-block;
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rose);
+    border: 1px solid var(--rose-light);
+    padding: 0.85rem 2.4rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    background: transparent;
+    animation: fadeUp 1s ease 1s both;
+    position: relative;
+    overflow: hidden;
+  }
 
-        /* Volante giratorio decorativo sutil */
-        .steering-wheel {
-            position: fixed;
-            bottom: 15px;
-            right: 15px;
-            font-size: 55px;
-            opacity: 0.4;
-            z-index: 15;
-            animation: spinWheel 12s linear infinite;
-            pointer-events: none;
-        }
+  .cta-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--rose);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+    z-index: -1;
+  }
 
-        @keyframes spinWheel {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
+  .cta-btn:hover {
+    color: white;
+    border-color: var(--rose);
+  }
+  .cta-btn:hover::before { transform: scaleX(1); }
 
-        /* Herramienta flotante adicional */
-        .tool {
-            position: fixed;
-            font-size: 28px;
-            pointer-events: none;
-            z-index: 10;
-            filter: drop-shadow(0 0 6px #00ced1);
-            animation: floatTool 8s linear infinite;
-        }
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    animation: fadeUp 1s ease 1.4s both;
+  }
 
-        @keyframes floatTool {
-            0% { transform: translateX(-10vw) translateY(110vh) rotate(0deg); opacity: 0.3; }
-            20% { opacity: 0.8; }
-            80% { opacity: 0.8; }
-            100% { transform: translateX(20vw) translateY(-20vh) rotate(360deg); opacity: 0; }
-        }
-    </style>
+  .scroll-hint span {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    opacity: 0.7;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--muted), transparent);
+    animation: scrollBob 2s ease-in-out infinite;
+  }
+  @keyframes scrollBob {
+    0%, 100% { transform: scaleY(1); opacity: 0.5; }
+    50%       { transform: scaleY(0.6); opacity: 1; }
+  }
+
+  /* SECTION: QUOTE CENTRAL */
+  .quote-section {
+    padding: 8rem 2rem;
+    background: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .quote-section::before {
+    content: '\201C';
+    position: absolute;
+    top: 2rem; left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20rem;
+    color: var(--rose-pale);
+    line-height: 1;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .quote-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .quote-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
+    line-height: 1.5;
+    color: var(--dark);
+    margin-bottom: 2rem;
+  }
+
+  .quote-author {
+    font-family: 'Jost', sans-serif;
+    font-weight: 200;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* SECTION: CARDS */
+  .cards-section {
+    padding: 6rem 2rem;
+    background: var(--cream);
+  }
+
+  .section-label {
+    text-align: center;
+    font-family: 'Jost', sans-serif;
+    font-weight: 200;
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4rem;
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .card {
+    background: white;
+    padding: 3rem 2rem;
+    text-align: center;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--rose-light);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+  }
+
+  .card:hover { transform: translateY(-4px); }
+  .card:hover::after { transform: scaleX(1); }
+
+  .card-icon {
+    font-size: 2rem;
+    margin-bottom: 1.2rem;
+    display: block;
+  }
+
+  .card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 1.4rem;
+    color: var(--dark);
+    margin-bottom: 0.8rem;
+  }
+
+  .card-text {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--muted);
+  }
+
+  /* SECTION: MESSAGE FINAL */
+  .message-section {
+    padding: 8rem 2rem;
+    background: var(--dark);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .message-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, #4A2A2A 0%, var(--dark) 70%);
+  }
+
+  .rose-deco {
+    position: absolute;
+    opacity: 0.06;
+  }
+
+  .message-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .message-eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-weight: 200;
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2.5rem;
+    opacity: 0.8;
+  }
+
+  .message-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--rose-pale);
+    line-height: 1.3;
+    margin-bottom: 2rem;
+  }
+
+  .message-body {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 0.95rem;
+    line-height: 2;
+    color: rgba(250, 230, 220, 0.65);
+    margin-bottom: 3.5rem;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .gold-line {
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    margin: 0 auto 3.5rem;
+    opacity: 0.6;
+  }
+
+  .signature {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--rose-light);
+    opacity: 0.8;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 2rem;
+    text-align: center;
+  }
+
+  footer p {
+    font-family: 'Jost', sans-serif;
+    font-weight: 200;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.2);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 600px) {
+    .cards-grid { grid-template-columns: 1fr; gap: 1px; }
+  }
+</style>
 </head>
 <body>
 
-    <!-- Canvas para lluvia binaria estilo matrix pero azul/turquesa -->
-    <canvas id="binaryCanvas"></canvas>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-line"></div>
+  <div class="petals-bg" id="petals"></div>
 
-    <!-- Contenedor de fondo con temática de taller (engranajes de fondo) -->
-    <div class="workshop-bg" id="workshopBg"></div>
-    
-    <!-- volante decorativo -->
-    <div class="steering-wheel">🚗⚙️</div>
+  <div class="hero-content">
+    <p class="eyebrow">Un homenaje con amor</p>
+    <h1 class="hero-title">
+      Feliz Día
+      <em>de las Madres</em>
+    </h1>
 
-    <!-- Mensaje principal: SOLO feliz cumpleaños y alusión a sus gustos visuales -->
-    <div class="main-card">
-        <div class="birthday-title">
-            🎉🔥 ¡FELIZ CUMPLEAÑOS! 🔥🎉
-        </div>
-        <div class="dad-name">
-            🧰  P A P I  🧰
-        </div>
-        <div class="mechanic-icons">
-            <span class="icon-item">🔧</span>
-            <span class="icon-item">🚗</span>
-            <span class="icon-item">⚙️</span>
-            <span class="icon-item">🛠️</span>
-            <span class="icon-item">🏎️</span>
-        </div>
-        <!-- Mensaje breve sin "te amo", solo celebración mecánica -->
-        <div style="margin-top: 25px; font-size: 1.3rem; color: #9cd4e0; font-weight: bold; background: rgba(0,0,0,0.5); border-radius: 40px; padding: 8px 20px; display: inline-block;">
-            ⚡ ¡A puro motor y felicidad! ⚡
-        </div>
+    <div class="divider">
+      <div class="divider-line"></div>
+      <svg class="divider-icon" viewBox="0 0 24 24" fill="none">
+        <path d="M12 21C12 21 3 14.5 3 8.5a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-9 12.5-9 12.5z" fill="#D4877A" opacity="0.8"/>
+      </svg>
+      <div class="divider-line right"></div>
     </div>
 
-    <script>
-        (function() {
-            // 1. LLUVIA BINARIA AZUL Y VERDE TURQUESA
-            const canvas = document.getElementById('binaryCanvas');
-            const ctx = canvas.getContext('2d');
-            let width, height;
-            
-            function resizeCanvas() {
-                width = window.innerWidth;
-                height = window.innerHeight;
-                canvas.width = width;
-                canvas.height = height;
-            }
-            resizeCanvas();
-            window.addEventListener('resize', resizeCanvas);
-            
-            // caracteres relacionados a mecánica y binario divertido
-            const chars = ['0', '1', '🔧', '⚙', '🚗', '🛞', '0', '1', '💧', '⚡', '1', '0', '🔩'];
-            const fontSize = 24;
-            let columns = Math.ceil(width / fontSize);
-            let drops = [];
-            
-            function initDrops() {
-                columns = Math.ceil(width / fontSize);
-                drops = [];
-                for (let i = 0; i < columns; i++) {
-                    drops[i] = Math.random() * -120;
-                }
-            }
-            initDrops();
-            
-            // función de color azul/turquesa con variación
-            function getFluidColor() {
-                const colors = [
-                    'rgba(0, 206, 209, 0.9)',   // turquesa
-                    'rgba(64, 224, 208, 0.85)', 
-                    'rgba(30, 144, 255, 0.9)',   // azul dodger
-                    'rgba(0, 191, 255, 0.9)',
-                    'rgba(72, 209, 204, 0.9)',
-                    'rgba(135, 206, 250, 0.9)',
-                    'rgba(0, 255, 255, 0.8)'     // cyan
-                ];
-                return colors[Math.floor(Math.random() * colors.length)];
-            }
-            
-            function drawRain() {
-                // fondo con estela sutil
-                ctx.fillStyle = 'rgba(2, 15, 22, 0.09)';
-                ctx.fillRect(0, 0, width, height);
-                ctx.font = `bold ${fontSize}px 'Courier New', 'Segoe UI Emoji'`;
-                
-                for (let i = 0; i < drops.length; i++) {
-                    const randomChar = chars[Math.floor(Math.random() * chars.length)];
-                    ctx.fillStyle = getFluidColor();
-                    ctx.shadowBlur = 6;
-                    ctx.shadowColor = '#00CED1';
-                    ctx.fillText(randomChar, i * fontSize, drops[i] * fontSize);
-                    ctx.shadowBlur = 0;
-                    
-                    drops[i] += 0.65; // velocidad suave
-                    if (drops[i] * fontSize > height && Math.random() > 0.98) {
-                        drops[i] = 0;
-                    }
-                }
-                requestAnimationFrame(drawRain);
-            }
-            
-            drawRain();
-            
-            // Reajustar columnas al redimensionar
-            window.addEventListener('resize', () => {
-                width = window.innerWidth;
-                height = window.innerHeight;
-                canvas.width = width;
-                canvas.height = height;
-                initDrops();
-            });
-            
-            // 2. FONDO CON HERRAMIENTAS, ENGRANAJES Y VEHÍCULOS FLOTANTES DE FORMA DINÁMICA
-            const bgContainer = document.getElementById('workshopBg');
-            const toolsList = ['🔧', '⚙️', '🔩', '🔨', '🚗', '🏎️', '🛞', '⛓️', '🧰', '🛠️', '⚡', '🔰'];
-            
-            function createFloatingTool() {
-                const tool = document.createElement('div');
-                tool.className = 'tool';
-                const randomTool = toolsList[Math.floor(Math.random() * toolsList.length)];
-                tool.innerText = randomTool;
-                const size = Math.floor(Math.random() * 35) + 22; // 22px a 57px
-                tool.style.fontSize = size + 'px';
-                tool.style.left = Math.random() * 90 + '%';
-                tool.style.animationDuration = 7 + Math.random() * 8 + 's';
-                tool.style.animationDelay = Math.random() * 5 + 's';
-                tool.style.opacity = Math.random() * 0.5 + 0.2;
-                bgContainer.appendChild(tool);
-                
-                setTimeout(() => {
-                    if(tool && tool.remove) tool.remove();
-                }, 15000);
-            }
-            
-            // crear elementos flotantes cada 600ms
-            setInterval(createFloatingTool, 650);
-            for(let i=0; i<12; i++) setTimeout(createFloatingTool, i*400);
-            
-            // 3. CHISPAS / SCINTILLATIONS DE TALLER (efecto de soldadura o motor)
-            function createSpark() {
-                const spark = document.createElement('div');
-                spark.classList.add('spark');
-                const startX = Math.random() * window.innerWidth;
-                const startY = window.innerHeight - Math.random() * 80;
-                spark.style.left = startX + 'px';
-                spark.style.top = startY + 'px';
-                spark.style.width = Math.random() * 7 + 3 + 'px';
-                spark.style.height = spark.style.width;
-                spark.style.background = `radial-gradient(circle, #00FFFF, #1E90FF)`;
-                spark.style.boxShadow = `0 0 12px #00CED1`;
-                document.body.appendChild(spark);
-                
-                setTimeout(() => {
-                    spark.remove();
-                }, 1100);
-            }
-            
-            // chispas más seguido para ambiente de taller
-            setInterval(() => {
-                for(let s=0; s<2; s++) {
-                    setTimeout(createSpark, s * 100);
-                }
-            }, 800);
-            
-            // 4. efecto de "lluvia de tuercas" sutil pero sin interferir el mensaje
-            function createNutRain() {
-                const nut = document.createElement('div');
-                nut.innerText = '🔩';
-                nut.style.position = 'fixed';
-                nut.style.left = Math.random() * 100 + '%';
-                nut.style.top = '-30px';
-                nut.style.fontSize = Math.random() * 18 + 14 + 'px';
-                nut.style.color = `rgba(0, 206, 209, ${Math.random() * 0.6 + 0.3})`;
-                nut.style.zIndex = '12';
-                nut.style.pointerEvents = 'none';
-                nut.style.filter = 'drop-shadow(0 0 3px #00ced1)';
-                nut.style.animation = 'fallNut 4s linear forwards';
-                document.body.appendChild(nut);
-                
-                setTimeout(() => nut.remove(), 4000);
-            }
-            
-            // agregar animación para las tuercas que caen
-            const styleSheet = document.createElement('style');
-            styleSheet.textContent = `
-                @keyframes fallNut {
-                    0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
-                    100% { transform: translateY(110vh) rotate(300deg); opacity: 0; }
-                }
-                .tool {
-                    position: fixed;
-                    font-size: 28px;
-                    pointer-events: none;
-                    z-index: 10;
-                    filter: drop-shadow(0 0 6px #00ced1);
-                    animation: floatTool 8s linear infinite;
-                }
-                @keyframes floatTool {
-                    0% { transform: translateX(-10vw) translateY(110vh) rotate(0deg); opacity: 0.3; }
-                    20% { opacity: 0.8; }
-                    80% { opacity: 0.8; }
-                    100% { transform: translateX(20vw) translateY(-20vh) rotate(360deg); opacity: 0; }
-                }
-            `;
-            document.head.appendChild(styleSheet);
-            
-            setInterval(createNutRain, 1300);
-            
-            // 5. pequeño efecto de cambio de color en el borde del mensaje (más dinámico)
-            const card = document.querySelector('.main-card');
-            let hue = 170;
-            setInterval(() => {
-                hue = (hue + 1) % 210;
-                const turquoiseShift = `rgba(0, ${180 + Math.sin(Date.now()/800)*30}, 210, 0.7)`;
-                if(card) {
-                    card.style.borderColor = `rgba(0, 210, 210, 0.9)`;
-                    card.style.boxShadow = `0 0 45px rgba(0, ${190 + Math.sin(Date.now()/600)*30}, 210, 0.5)`;
-                }
-            }, 180);
-            
-            // 6. más elementos vehiculares aleatorios (siluetas de autos)
-            function addCarSilhouette() {
-                const carSpan = document.createElement('div');
-                carSpan.innerText = '🚗💨';
-                carSpan.style.position = 'fixed';
-                carSpan.style.bottom = '5%';
-                carSpan.style.left = '-80px';
-                carSpan.style.fontSize = '42px';
-                carSpan.style.opacity = '0.35';
-                carSpan.style.zIndex = '5';
-                carSpan.style.pointerEvents = 'none';
-                carSpan.style.animation = 'driveBy 8s linear forwards';
-                document.body.appendChild(carSpan);
-                setTimeout(() => carSpan.remove(), 8000);
-            }
-            
-            const driveStyle = document.createElement('style');
-            driveStyle.textContent = `
-                @keyframes driveBy {
-                    0% { left: -80px; opacity: 0.2; }
-                    10% { opacity: 0.5; }
-                    90% { opacity: 0.5; }
-                    100% { left: 110%; opacity: 0; }
-                }
-            `;
-            document.head.appendChild(driveStyle);
-            
-            setInterval(addCarSilhouette, 5500);
-            
-            // Botón secreto no, pero efecto de "aceleración" al hacer click? solo diversión visual
-            // hacer que aparezcan rayas de velocidad ocasionalmente
-            function speedLines() {
-                const line = document.createElement('div');
-                line.style.position = 'fixed';
-                line.style.width = '100px';
-                line.style.height = '2px';
-                line.style.background = 'linear-gradient(90deg, transparent, #00ffff, #1e90ff, transparent)';
-                line.style.left = '0%';
-                line.style.top = Math.random() * 100 + '%';
-                line.style.opacity = '0.6';
-                line.style.zIndex = '18';
-                line.style.pointerEvents = 'none';
-                line.style.animation = 'speedLine 0.8s linear forwards';
-                document.body.appendChild(line);
-                setTimeout(() => line.remove(), 800);
-            }
-            
-            const lineAnim = document.createElement('style');
-            lineAnim.textContent = `
-                @keyframes speedLine {
-                    0% { transform: translateX(-100%); opacity: 0.8; width: 60px;}
-                    100% { transform: translateX(150%); opacity: 0; width: 220px;}
-                }
-            `;
-            document.head.appendChild(lineAnim);
-            
-            setInterval(() => {
-                if(Math.random() > 0.7) speedLines();
-            }, 1700);
-            
-            // 7. Ajuste para que no haya nada del texto romántico original (eliminado por completo)
-            console.log('🎂✨ Versión especial para Papá amante de la mecánica, solo feliz cumpleaños');
-        })();
-    </script>
+    <p class="hero-quote">
+      "Ser madre no es solo dar vida —<br>
+      es elegir cada día dar amor."
+    </p>
+
+    <a class="cta-btn" href="#mensaje">
+      Ver el mensaje
+    </a>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Desplázate</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote-section">
+  <div class="quote-inner reveal">
+    <p class="quote-text">
+      "Toda mujer que ama, cuida y sostiene<br>
+      merece ser celebrada hoy y siempre."
+    </p>
+    <p class="quote-author">Para cada madre, en todas sus formas</p>
+  </div>
+</section>
+
+<!-- CARDS -->
+<section class="cards-section">
+  <p class="section-label reveal">Lo que eres</p>
+  <div class="cards-grid">
+    <div class="card reveal">
+      <span class="card-icon">🌹</span>
+      <h3 class="card-title">Refugio</h3>
+      <p class="card-text">Hay personas que convierten cualquier lugar en hogar solo con su presencia y su amor.</p>
+    </div>
+    <div class="card reveal" style="transition-delay: 0.15s">
+      <span class="card-icon">🕯️</span>
+      <h3 class="card-title">Luz</h3>
+      <p class="card-text">Las madres iluminan caminos sin pedir reconocimiento, guían sin imponer y aman sin condición.</p>
+    </div>
+    <div class="card reveal" style="transition-delay: 0.3s">
+      <span class="card-icon">🌿</span>
+      <h3 class="card-title">Raíz</h3>
+      <p class="card-text">Detrás de cada persona que crece fuerte, hay alguien que la sostuvo cuando más lo necesitaba.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MENSAJE FINAL -->
+<section class="message-section" id="mensaje">
+  <svg class="rose-deco" style="top:-100px;right:-80px;width:400px;height:400px" viewBox="0 0 200 200">
+    <circle cx="100" cy="100" r="80" fill="none" stroke="#D4877A" stroke-width="0.5"/>
+    <circle cx="100" cy="100" r="55" fill="none" stroke="#D4877A" stroke-width="0.5"/>
+    <circle cx="100" cy="100" r="30" fill="none" stroke="#D4877A" stroke-width="0.5"/>
+    <line x1="100" y1="20" x2="100" y2="180" stroke="#D4877A" stroke-width="0.3"/>
+    <line x1="20" y1="100" x2="180" y2="100" stroke="#D4877A" stroke-width="0.3"/>
+    <line x1="43" y1="43" x2="157" y2="157" stroke="#D4877A" stroke-width="0.3"/>
+    <line x1="157" y1="43" x2="43" y2="157" stroke="#D4877A" stroke-width="0.3"/>
+  </svg>
+
+  <div class="message-inner reveal">
+    <p class="message-eyebrow">Con todo el amor</p>
+    <h2 class="message-title">
+      Gracias por todo el amor<br>que das sin medirlo.
+    </h2>
+    <div class="gold-line"></div>
+    <p class="message-body">
+      Ser madre se vive de mil maneras diferentes.
+      En una llamada a tiempo, en un abrazo que no necesita palabras,
+      en estar presente cuando más importa.
+      <br><br>
+      Hoy celebramos a todas las mujeres que eligen amar así.
+    </p>
+    <p class="signature">Con amor infinito 🤍</p>
+  </div>
+</section>
+
+<footer>
+  <p>Hecho con amor · Día de las Madres</p>
+</footer>
+
+<script>
+  // Petals
+  const petalsContainer = document.getElementById('petals');
+  const colors = ['#F2C4BA','#EAC4C4','#D4877A','#F7DDD6','#C9A86C'];
+  for (let i = 0; i < 22; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    const size = Math.random() * 14 + 6;
+    p.style.cssText = `
+      left: ${Math.random() * 100}%;
+      width: ${size}px;
+      height: ${size * 1.3}px;
+      background: ${colors[Math.floor(Math.random() * colors.length)]};
+      animation-duration: ${Math.random() * 8 + 6}s;
+      animation-delay: ${Math.random() * 8}s;
+      opacity: 0;
+      border-radius: ${Math.random() > 0.5 ? '50% 0 50% 0' : '0 50% 0 50%'};
+    `;
+    petalsContainer.appendChild(p);
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
