@@ -3,326 +3,323 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Feliz Cumpleaños</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<title>¡Feliz Cumpleaños!</title>
 <style>
-  :root{
-    --night-deep:#0a1830;
-    --night-mid:#15355c;
-    --night-soft:#28577f;
-    --starlight:#f4e9b8;
-    --gold-bright:#d9b44a;
-    --gold-deep:#8c5f24;
-    --gold-line:#c9a227;
-    --kiss-red:#823333;
-    --paper:#faf2df;
-    --paper-line:#e3d3ac;
-    --ink:#2c2318;
-    --ink-soft:#5a4d3a;
+  :root {
+    --pokeball-red: #e3350d;
+    --pokeball-dark: #1a1a1a;
+    --science-green: #2e7d32;
+    --science-light: #a5d6a7;
+    --gold: #ffd700;
   }
 
-  *{ box-sizing:border-box; }
-
-  body{
-    margin:0;
-    background:#060d1c;
-    font-family:'Cormorant Garamond', serif;
-    color:var(--ink);
-    display:flex;
-    justify-content:center;
-    padding:32px 14px;
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
 
-  .card{
-    width:100%;
-    max-width:520px;
-    background:var(--paper);
-    border-radius:6px;
-    overflow:hidden;
-    box-shadow:0 30px 70px rgba(0,0,0,0.55);
-    position:relative;
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Trebuchet MS', 'Segoe UI', sans-serif;
+    background: radial-gradient(circle at 20% 20%, #2b3a67, #1b1f3b 60%, #0d0f1f);
+    overflow: hidden;
+    position: relative;
   }
 
-  /* ---------- SECTION: HERO — STARRY NIGHT ---------- */
-  .hero{
-    position:relative;
-    min-height:420px;
-    background:
-      radial-gradient(circle at 78% 18%, rgba(244,233,184,0.55) 0%, rgba(244,233,184,0.12) 9%, transparent 10%),
-      radial-gradient(ellipse at 50% 120%, var(--night-soft) 0%, var(--night-mid) 45%, var(--night-deep) 100%);
-    overflow:hidden;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:40px 24px;
-  }
-
-  .moon{
-    position:absolute;
-    top:14%;
-    right:18%;
-    width:64px;
-    height:64px;
-    border-radius:50%;
-    background:radial-gradient(circle at 35% 35%, #fff8dd, var(--starlight) 55%, var(--gold-bright) 100%);
-    box-shadow:0 0 40px 14px rgba(244,233,184,0.35);
-  }
-
-  .swirls{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    opacity:0.85;
-  }
-
-  .swirl-group{
-    transform-origin: 30% 65%;
-    animation: driftSwirl 34s ease-in-out infinite;
-  }
-
-  @keyframes driftSwirl{
-    0%,100%{ transform: rotate(0deg) scale(1); }
-    50%{ transform: rotate(3deg) scale(1.03); }
-  }
-
-  .star{
-    position:absolute;
-    width:3px;
-    height:3px;
-    background:var(--starlight);
-    border-radius:50%;
-    box-shadow:0 0 6px 1px rgba(244,233,184,0.8);
-    animation: twinkle 3.4s ease-in-out infinite;
-  }
-  .star:nth-child(2n){ animation-duration:4.2s; }
-  .star:nth-child(3n){ animation-duration:2.6s; animation-delay:0.6s; }
-  .star:nth-child(5n){ animation-delay:1.2s; }
-
-  @keyframes twinkle{
-    0%,100%{ opacity:0.25; transform:scale(0.8); }
-    50%{ opacity:1; transform:scale(1.3); }
-  }
-
-  .hero-eyebrow{
-    color:var(--starlight);
-    letter-spacing:0.32em;
-    font-size:11px;
-    text-transform:uppercase;
-    font-family:'Cormorant Garamond', serif;
-    opacity:0.85;
-    margin:0 0 18px;
-    z-index:2;
-  }
-
-  .hero-title{
-    font-family:'Great Vibes', cursive;
-    color:#fff8e8;
-    font-size:clamp(40px, 11vw, 58px);
-    margin:0;
-    z-index:2;
-    text-shadow:0 0 22px rgba(217,180,74,0.45);
-    line-height:1.15;
-  }
-
-  .hero-sub{
-    z-index:2;
-    color:#e7dcb0;
-    font-style:italic;
-    font-weight:400;
-    font-size:16px;
-    margin-top:14px;
-    max-width:320px;
-    opacity:0.9;
-  }
-
-  /* ---------- DIVIDER: where the two worlds meet ---------- */
-  .divider{
-    position:relative;
-    height:56px;
-    background:linear-gradient(180deg, var(--night-deep) 0%, var(--gold-deep) 100%);
-  }
-  .divider svg{ position:absolute; bottom:-1px; left:0; width:100%; height:60px; }
-
-  /* ---------- SECTION: MESSAGE — cream + gold leaf ---------- */
-  .message-section{
-    background:var(--paper);
-    padding:44px 30px 40px;
-    position:relative;
+  /* Estrellas de fondo tipo "laboratorio nocturno" */
+  .stars {
+    position: fixed;
+    inset: 0;
     background-image:
-      repeating-linear-gradient(transparent, transparent 33px, var(--paper-line) 34px);
+      radial-gradient(2px 2px at 20% 30%, white, transparent),
+      radial-gradient(2px 2px at 60% 70%, white, transparent),
+      radial-gradient(1px 1px at 80% 20%, white, transparent),
+      radial-gradient(1px 1px at 40% 80%, white, transparent),
+      radial-gradient(2px 2px at 90% 60%, white, transparent),
+      radial-gradient(1px 1px at 10% 90%, white, transparent);
+    background-size: 400px 400px;
+    opacity: 0.6;
+    animation: twinkle 4s infinite alternate;
+    pointer-events: none;
   }
 
-  .message-section::before, .message-section::after{
-    content:"";
-    position:absolute;
-    width:34px; height:34px;
-    border:2px solid var(--gold-line);
-    opacity:0.55;
-  }
-  .message-section::before{ top:14px; left:14px; border-right:none; border-bottom:none; }
-  .message-section::after{ bottom:14px; right:14px; border-left:none; border-top:none; }
-
-  .section-label{
-    font-family:'Great Vibes', cursive;
-    font-size:34px;
-    color:var(--gold-deep);
-    text-align:center;
-    margin:0 0 6px;
+  @keyframes twinkle {
+    from { opacity: 0.3; }
+    to { opacity: 0.7; }
   }
 
-  .section-hint{
-    text-align:center;
-    font-size:13px;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    color:var(--ink-soft);
-    font-family:'Cormorant Garamond', serif;
-    margin:0 0 26px;
+  .container {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 20px;
   }
 
-  .message-box{
-    min-height:180px;
-    font-family:'Cormorant Garamond', serif;
-    font-style:italic;
-    font-size:19px;
-    line-height:34px;
-    color:var(--ink);
-    outline:none;
-    padding:0 4px;
-  }
-  .message-box:empty::before{
-    content:"Escribe aquí tu mensaje para ella\2026";
-    color:#a8987a;
+  .hint {
+    color: #f5f5f5;
+    font-size: 1rem;
+    margin-bottom: 25px;
+    opacity: 0.85;
+    animation: floatText 2.5s ease-in-out infinite;
   }
 
-  .signoff{
-    text-align:right;
-    font-family:'Great Vibes', cursive;
-    font-size:24px;
-    color:var(--gold-deep);
-    margin-top:18px;
-    outline:none;
-  }
-  .signoff:empty::before{
-    content:"Con todo mi cariño, tu hermana";
-    color:#c9b98d;
+  @keyframes floatText {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
   }
 
-  /* ---------- SECTION: FUTURE ---------- */
-  .future-section{
-    background:linear-gradient(160deg, var(--night-deep) 0%, var(--gold-deep) 120%);
-    padding:42px 30px 48px;
-    text-align:center;
-  }
-  .future-section .section-label{ color:var(--starlight); }
-  .future-text{
-    color:#f2e6c4;
-    font-size:17px;
-    line-height:1.7;
-    max-width:400px;
-    margin:0 auto;
-  }
-  .future-text b{ color:var(--gold-bright); font-weight:600; }
-
-  .gear-row{
-    display:flex;
-    justify-content:center;
-    gap:10px;
-    margin:22px 0 4px;
-    opacity:0.75;
-  }
-  .gear-row svg{ width:20px; height:20px; }
-
-  footer{
-    text-align:center;
-    padding:18px 10px 26px;
-    background:var(--night-deep);
-    color:#8a97ad;
-    font-size:12px;
-    letter-spacing:0.1em;
-    text-transform:uppercase;
+  /* --- POKEBALL --- */
+  .pokeball-wrapper {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto;
+    cursor: pointer;
+    animation: bounce 2s ease-in-out infinite;
+    transition: transform 0.3s;
   }
 
-  @media (max-width:420px){
-    .hero{ min-height:360px; padding:32px 18px; }
-    .message-section, .future-section{ padding-left:20px; padding-right:20px; }
+  .pokeball-wrapper:hover {
+    transform: scale(1.08);
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(5deg); }
+  }
+
+  .pokeball {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(var(--pokeball-red) 0%, var(--pokeball-red) 47%, var(--pokeball-dark) 47%, var(--pokeball-dark) 53%, white 53%, white 100%);
+    border: 6px solid var(--pokeball-dark);
+    position: relative;
+    box-shadow: 0 0 40px rgba(227, 53, 13, 0.5), inset 0 -10px 20px rgba(0,0,0,0.2);
+  }
+
+  .pokeball::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    background: white;
+    border: 6px solid var(--pokeball-dark);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: inset 0 0 0 6px #ddd;
+  }
+
+  .pokeball.opened {
+    animation: openPulse 0.6s ease forwards;
+  }
+
+  @keyframes openPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3) rotate(180deg); opacity: 0.6; }
+    100% { transform: scale(0); opacity: 0; }
+  }
+
+  .container.hidden-ball .pokeball-wrapper,
+  .container.hidden-ball .hint {
+    display: none;
+  }
+
+  /* --- TARJETA --- */
+  .card {
+    display: none;
+    max-width: 500px;
+    background: linear-gradient(160deg, #ffffff, #f1f8f4);
+    border-radius: 24px;
+    padding: 35px 30px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    position: relative;
+    overflow: hidden;
+    animation: appear 0.8s ease forwards;
+    border: 4px solid var(--gold);
+  }
+
+  .card.show {
+    display: block;
+  }
+
+  @keyframes appear {
+    from { opacity: 0; transform: scale(0.7) translateY(30px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  /* Decoración científica sutil */
+  .dna {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    font-size: 5rem;
+    opacity: 0.08;
+    transform: rotate(20deg);
+  }
+
+  .leaf {
+    position: absolute;
+    bottom: -10px;
+    left: -10px;
+    font-size: 4rem;
+    opacity: 0.1;
+  }
+
+  .card h1 {
+    color: var(--pokeball-red);
+    font-size: 1.8rem;
+    margin-bottom: 6px;
+    position: relative;
+  }
+
+  .card .subtitle {
+    color: var(--science-green);
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+  }
+
+  .message {
+    color: #333;
+    line-height: 1.7;
+    font-size: 1.05rem;
+    text-align: left;
+    position: relative;
+  }
+
+  .message p {
+    margin-bottom: 14px;
+  }
+
+  .message strong {
+    color: var(--pokeball-red);
+  }
+
+  .signature {
+    margin-top: 20px;
+    font-style: italic;
+    color: var(--science-green);
+    text-align: right;
+    font-size: 1rem;
+  }
+
+  .badges {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+  }
+
+  .badge {
+    background: var(--science-light);
+    color: #1b1f3b;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+
+  /* Confeti */
+  .confetti {
+    position: fixed;
+    top: -10px;
+    z-index: 10;
+    pointer-events: none;
+    animation: fall linear forwards;
+  }
+
+  @keyframes fall {
+    to {
+      transform: translateY(110vh) rotate(360deg);
+      opacity: 0.3;
+    }
+  }
+
+  footer.small-note {
+    margin-top: 18px;
+    font-size: 0.8rem;
+    color: #888;
+    text-align: center;
   }
 </style>
 </head>
 <body>
 
-<div class="card">
+<div class="stars"></div>
 
-  <!-- HERO: Starry Night -->
-  <section class="hero">
-    <div class="moon"></div>
-    <svg class="swirls" viewBox="0 0 500 420" preserveAspectRatio="xMidYMid slice">
-      <g class="swirl-group" fill="none" stroke="rgba(244,233,184,0.5)" stroke-width="2.4" stroke-linecap="round">
-        <path d="M40,340 C40,300 90,300 90,270 C90,240 60,235 60,205 C60,175 100,170 100,140" />
-        <path d="M120,360 C160,330 150,300 190,290 C230,280 220,240 260,230" />
-        <path d="M300,380 C300,340 350,335 350,300 C350,265 310,260 310,225" opacity="0.7"/>
-        <path d="M-10,120 C40,110 70,140 120,120 C170,100 190,60 240,55" opacity="0.6"/>
-      </g>
-      <g fill="rgba(244,233,184,0.6)">
-        <circle cx="70" cy="270" r="4"/>
-        <circle cx="260" cy="230" r="3"/>
-        <circle cx="350" cy="300" r="3.5"/>
-      </g>
-    </svg>
-    <div class="star" style="top:12%; left:15%;"></div>
-    <div class="star" style="top:22%; left:60%;"></div>
-    <div class="star" style="top:8%; left:40%;"></div>
-    <div class="star" style="top:35%; left:80%;"></div>
-    <div class="star" style="top:48%; left:10%;"></div>
-    <div class="star" style="top:60%; left:70%;"></div>
-    <div class="star" style="top:18%; left:88%;"></div>
-    <div class="star" style="top:70%; left:30%;"></div>
-    <div class="star" style="top:40%; left:50%;"></div>
-
-    <p class="hero-eyebrow">un lienzo solo para ti</p>
-    <h1 class="hero-title">Feliz Cumpleaños</h1>
-    <p class="hero-sub">Entre remolinos de noche estrellada y hojas de oro, hoy celebramos tu luz.</p>
-  </section>
-
-  <!-- Divider: swirl meets gold -->
-  <div class="divider">
-    <svg viewBox="0 0 500 60" preserveAspectRatio="none">
-      <path d="M0,20 C80,50 160,0 240,25 C320,50 400,5 500,30 L500,60 L0,60 Z" fill="#faf2df"/>
-    </svg>
+<div class="container" id="container">
+  <p class="hint">Toca la Pokébola para abrir tu sorpresa ✨</p>
+  <div class="pokeball-wrapper" id="pokeballBtn">
+    <div class="pokeball" id="pokeball"></div>
   </div>
 
-  <!-- Message section -->
-  <section class="message-section">
-    <p class="section-label">Para ti</p>
-    <p class="section-hint">un mensaje escrito con cariño para mi Bro</p>
-    <div class="message-box" contenteditable="true">Hermanita,<br><br>Hoy quiero detenerme un segundo y decirte lo orgullosa que estoy de ti. Desde que te conozco has tenido esa mirada que encuentra belleza donde otros no la ven &mdash; igual que Van Gogh convert&iacute;a sus noches m&aacute;s dif&iacute;ciles en cielos llenos de estrellas, t&uacute; tienes esa capacidad de transformar todo lo que tocas.<br><br>Te deseo un a&ntilde;o lleno de arte y de todos los pasos que te acerquen a convertirte en la ingeniera que s&eacute; que ser&aacute;s. Que este nuevo a&ntilde;o de vida est&eacute; pintado con los mismos colores dorados que tanto amas.<br><br>Te amo. Feliz cumplea&ntilde;os.</div>
-    <div class="signoff" contenteditable="true">&mdash; AG</div>
-  </section>
+  <div class="card" id="card">
+    <span class="dna">🧬</span>
+    <span class="leaf">🍃</span>
 
-  <!-- Future: Industrial Engineering -->
-  <section class="future-section">
-    <p class="section-label">Y lo que viene</p>
-    <p class="future-text">
-      Así como Van Gogh transformaba el caos del cielo en belleza, y Klimt convertía el oro en emoción,
-      tú estás por transformar <b>sistemas en soluciones</b>. Que tu camino hacia la
-      <b>Ingeniería Industrial</b> esté lleno de la misma pasión con la que amas el arte y la música.
-    </p>
-    <div class="gear-row">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#d9b44a" stroke-width="1.6">
-        <circle cx="12" cy="12" r="3.2"/>
-        <path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/>
-      </svg>
+    <h1>¡Feliz Cumpleaños! 🎉</h1>
+    <p class="subtitle">Nivel subido: +1 año de sabiduría 🎓</p>
+
+    <div class="message">
+      <p>Querido primo,</p>
+      <p>Hoy celebramos a alguien que, como un buen <strong>Profesor Oak</strong>, siempre está dispuesto a enseñar, guiar y compartir su conocimiento con paciencia y calidez. Tu amor por las ciencias naturales inspira a quienes te rodean, y tu forma tranquila, respetuosa y responsable de ver la vida te convierte en un ejemplo para todos nosotros.</p>
+      <p>Eres de esos entrenadores que no necesitan gritar para liderar: basta tu ejemplo. Gracias por ser el hermano mayor amable y confiable que todos quisiéramos tener a nuestro lado en cualquier aventura, ¡como un buen equipo Pokémon!</p>
+      <p>Que este nuevo año esté lleno de descubrimientos, curiosidad infinita y muchas victorias, tanto en el laboratorio como en la vida.</p>
     </div>
-  </section>
 
-  <footer>hecho con arte y mucho cariño</footer>
+    <div class="badges">
+      <span class="badge">🔬 Amante de la ciencia</span>
+      <span class="badge">📘 Maestro por vocación</span>
+      <span class="badge">⚡ Corazón Pikachu</span>
+      <span class="badge">🌿 Alma tranquila</span>
+    </div>
 
+    <p class="signature">Con cariño, tu familia 💛</p>
+    <footer class="small-note">¡Que la Pokédex de tu vida siga llenándose de momentos increíbles!</footer>
+  </div>
 </div>
+
+<script>
+  const pokeballBtn = document.getElementById('pokeballBtn');
+  const pokeball = document.getElementById('pokeball');
+  const card = document.getElementById('card');
+  const container = document.getElementById('container');
+
+  function launchConfetti() {
+    const colors = ['#e3350d', '#ffd700', '#2e7d32', '#3b4cca', '#ffffff'];
+    const shapes = ['●', '★', '▲', '■'];
+    for (let i = 0; i < 60; i++) {
+      const piece = document.createElement('div');
+      piece.className = 'confetti';
+      piece.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+      piece.style.left = Math.random() * 100 + 'vw';
+      piece.style.color = colors[Math.floor(Math.random() * colors.length)];
+      piece.style.fontSize = (Math.random() * 14 + 10) + 'px';
+      piece.style.animationDuration = (Math.random() * 2 + 3) + 's';
+      document.body.appendChild(piece);
+      setTimeout(() => piece.remove(), 5500);
+    }
+  }
+
+  pokeballBtn.addEventListener('click', () => {
+    pokeball.classList.add('opened');
+    launchConfetti();
+    setTimeout(() => {
+      container.classList.add('hidden-ball');
+      card.classList.add('show');
+      launchConfetti();
+    }, 500);
+  });
+</script>
 
 </body>
 </html>
