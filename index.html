@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8"> 
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>¡Feliz Cumpleaños!</title>
+<title>¡Feliz Cumpleaños, Campeón!</title>
 <style>
   :root {
-    --pokeball-red: #e3350d;
-    --pokeball-dark: #1a1a1a;
-    --science-green: #2e7d32;
-    --science-light: #a5d6a7;
     --gold: #ffd700;
+    --gold-dark: #b8860b;
+    --ring-red: #c8102e;
+    --ring-blue: #1e3a8a;
+    --dark: #0a0a0a;
   }
 
   * {
@@ -19,39 +19,33 @@
     box-sizing: border-box;
   }
 
- body {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Trebuchet MS', 'Segoe UI', sans-serif;
-  background: radial-gradient(circle at 20% 20%, #2b3a67, #1b1f3b 60%, #0d0f1f);
-  overflow-y: auto;   /* antes: overflow: hidden */
-  overflow-x: hidden;
-  position: relative;
-  padding: 20px 0;    /* para que no quede pegado a los bordes al hacer scroll */
-}
-
-  /* Estrellas de fondo tipo "laboratorio nocturno" */
-  .stars {
-    position: fixed;
-    inset: 0;
-    background-image:
-      radial-gradient(2px 2px at 20% 30%, white, transparent),
-      radial-gradient(2px 2px at 60% 70%, white, transparent),
-      radial-gradient(1px 1px at 80% 20%, white, transparent),
-      radial-gradient(1px 1px at 40% 80%, white, transparent),
-      radial-gradient(2px 2px at 90% 60%, white, transparent),
-      radial-gradient(1px 1px at 10% 90%, white, transparent);
-    background-size: 400px 400px;
-    opacity: 0.6;
-    animation: twinkle 4s infinite alternate;
-    pointer-events: none;
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Arial Black', 'Trebuchet MS', sans-serif;
+    background: radial-gradient(circle at 50% 20%, #2a2a3d, #0a0a0a 70%);
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+    padding: 20px 0;
   }
 
-  @keyframes twinkle {
-    from { opacity: 0.3; }
-    to { opacity: 0.7; }
+  /* Reflectores de arena */
+  .spotlights {
+    position: fixed;
+    inset: 0;
+    background:
+      conic-gradient(from 200deg at 15% 0%, rgba(255,215,0,0.12), transparent 25%),
+      conic-gradient(from 340deg at 85% 0%, rgba(200,16,46,0.12), transparent 25%);
+    pointer-events: none;
+    animation: sway 6s ease-in-out infinite alternate;
+  }
+
+  @keyframes sway {
+    from { opacity: 0.5; }
+    to { opacity: 1; }
   }
 
   .container {
@@ -66,6 +60,8 @@
     font-size: 1rem;
     margin-bottom: 25px;
     opacity: 0.85;
+    letter-spacing: 1px;
+    text-transform: uppercase;
     animation: floatText 2.5s ease-in-out infinite;
   }
 
@@ -74,72 +70,100 @@
     50% { transform: translateY(-6px); }
   }
 
-  /* --- POKEBALL --- */
-  .pokeball-wrapper {
-    width: 180px;
-    height: 180px;
+  /* --- CINTURÓN --- */
+  .belt-wrapper {
+    width: 220px;
+    height: 150px;
     margin: 0 auto;
     cursor: pointer;
-    animation: bounce 2s ease-in-out infinite;
+    animation: pulse 2s ease-in-out infinite;
     transition: transform 0.3s;
   }
 
-  .pokeball-wrapper:hover {
-    transform: scale(1.08);
+  .belt-wrapper:hover {
+    transform: scale(1.06);
   }
 
-  @keyframes bounce {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-15px) rotate(5deg); }
+  @keyframes pulse {
+    0%, 100% { filter: drop-shadow(0 0 15px rgba(255,215,0,0.5)); }
+    50% { filter: drop-shadow(0 0 35px rgba(255,215,0,0.9)); }
   }
 
-  .pokeball {
+  .belt {
     width: 100%;
     height: 100%;
-    border-radius: 50%;
-    background: linear-gradient(var(--pokeball-red) 0%, var(--pokeball-red) 47%, var(--pokeball-dark) 47%, var(--pokeball-dark) 53%, white 53%, white 100%);
-    border: 6px solid var(--pokeball-dark);
     position: relative;
-    box-shadow: 0 0 40px rgba(227, 53, 13, 0.5), inset 0 -10px 20px rgba(0,0,0,0.2);
   }
 
-  .pokeball::after {
-    content: '';
+  .belt-strap {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 34px;
+    background: linear-gradient(#3a2a1a, #1a1008);
+    transform: translateY(-50%);
+    border-radius: 6px;
+  }
+
+  .belt-plate {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 50px;
-    height: 50px;
-    background: white;
-    border: 6px solid var(--pokeball-dark);
-    border-radius: 50%;
     transform: translate(-50%, -50%);
-    box-shadow: inset 0 0 0 6px #ddd;
+    width: 130px;
+    height: 100px;
+    background: linear-gradient(145deg, var(--gold), var(--gold-dark));
+    border-radius: 16px;
+    border: 4px solid #7a5c0e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.4);
   }
 
-  .pokeball.opened {
-    animation: openPulse 0.6s ease forwards;
+  .belt-plate::before {
+    content: '🏆';
+    font-size: 3rem;
   }
 
-  @keyframes openPulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.3) rotate(180deg); opacity: 0.6; }
-    100% { transform: scale(0); opacity: 0; }
+  .belt-side {
+    position: absolute;
+    top: 50%;
+    width: 55px;
+    height: 70px;
+    background: linear-gradient(145deg, var(--gold), var(--gold-dark));
+    border-radius: 10px;
+    border: 3px solid #7a5c0e;
+    transform: translateY(-50%);
   }
 
-  .container.hidden-ball .pokeball-wrapper,
-  .container.hidden-ball .hint {
+  .belt-side.left { left: 15px; }
+  .belt-side.right { right: 15px; }
+
+  .belt.opened {
+    animation: openBelt 0.6s ease forwards;
+  }
+
+  @keyframes openBelt {
+    0% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(1.3) rotate(-15deg); opacity: 0.7; }
+    100% { transform: scale(0) rotate(15deg); opacity: 0; }
+  }
+
+  .container.hidden-belt .belt-wrapper,
+  .container.hidden-belt .hint {
     display: none;
   }
 
   /* --- TARJETA --- */
   .card {
     display: none;
-    max-width: 500px;
-    background: linear-gradient(160deg, #ffffff, #f1f8f4);
-    border-radius: 24px;
+    max-width: 520px;
+    background: linear-gradient(160deg, #1a1a1a, #2a2a2a);
+    border-radius: 20px;
     padding: 35px 30px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.7);
     position: relative;
     overflow: hidden;
     animation: appear 0.8s ease forwards;
@@ -155,41 +179,41 @@
     to { opacity: 1; transform: scale(1) translateY(0); }
   }
 
-  /* Decoración científica sutil */
-  .dna {
+  /* Cuerdas del ring como decoración */
+  .ropes {
     position: absolute;
-    top: -20px;
-    right: -20px;
-    font-size: 5rem;
-    opacity: 0.08;
-    transform: rotate(20deg);
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background: repeating-linear-gradient(90deg, var(--ring-red) 0 20px, var(--ring-blue) 20px 40px);
+    opacity: 0.9;
   }
 
-  .leaf {
-    position: absolute;
-    bottom: -10px;
-    left: -10px;
-    font-size: 4rem;
-    opacity: 0.1;
+  .ropes.bottom {
+    top: auto;
+    bottom: 0;
   }
 
   .card h1 {
-    color: var(--pokeball-red);
-    font-size: 1.8rem;
-    margin-bottom: 6px;
-    position: relative;
+    color: var(--gold);
+    font-size: 1.9rem;
+    margin: 20px 0 6px;
+    text-shadow: 0 0 12px rgba(255,215,0,0.5);
+    letter-spacing: 1px;
   }
 
   .card .subtitle {
-    color: var(--science-green);
+    color: var(--ring-red);
     font-weight: bold;
     margin-bottom: 20px;
     font-size: 0.95rem;
-    letter-spacing: 0.5px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
   }
 
   .message {
-    color: #333;
+    color: #eee;
     line-height: 1.7;
     font-size: 1.05rem;
     text-align: left;
@@ -201,13 +225,13 @@
   }
 
   .message strong {
-    color: var(--pokeball-red);
+    color: var(--gold);
   }
 
   .signature {
     margin-top: 20px;
     font-style: italic;
-    color: var(--science-green);
+    color: var(--gold);
     text-align: right;
     font-size: 1rem;
   }
@@ -221,16 +245,15 @@
   }
 
   .badge {
-    background: var(--science-light);
-    color: #1b1f3b;
+    background: var(--ring-red);
+    color: white;
     padding: 6px 14px;
     border-radius: 20px;
     font-size: 0.8rem;
     font-weight: bold;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
   }
 
-  /* Confeti */
   .confetti {
     position: fixed;
     top: -10px;
@@ -249,53 +272,59 @@
   footer.small-note {
     margin-top: 18px;
     font-size: 0.8rem;
-    color: #888;
+    color: #999;
     text-align: center;
   }
 </style>
 </head>
 <body>
 
-<div class="stars"></div>
+<div class="spotlights"></div>
 
 <div class="container" id="container">
-  <p class="hint">Toca la Pokébola para abrir tu sorpresa</p>
-  <div class="pokeball-wrapper" id="pokeballBtn">
-    <div class="pokeball" id="pokeball"></div>
+  <p class="hint">Toca el cinturón para revelar tu sorpresa</p>
+  <div class="belt-wrapper" id="beltBtn">
+    <div class="belt" id="belt">
+      <div class="belt-strap"></div>
+      <div class="belt-side left"></div>
+      <div class="belt-side right"></div>
+      <div class="belt-plate"></div>
+    </div>
   </div>
 
   <div class="card" id="card">
-    <span class="dna">🧬</span>
-    <span class="leaf">🍃</span>
+    <div class="ropes"></div>
+    <div class="ropes bottom"></div>
 
-    <h1>¡Feliz Cumpleaños! 🎉</h1>
-    <p class="subtitle">Nivel subido: +1 año de sabiduría 🎓</p>
+    <h1>¡Feliz Cumpleaños, Campeón! 🏆</h1>
+    <p class="subtitle">Hoy defiendes el título de mejor tío del mundo</p>
 
     <div class="message">
-      <p>Ramon,</p>
-      <p>Hoy celebramos a alguien que, como un buen <strong>Profesor Oak</strong>, siempre está dispuesto a enseñar, guiar y compartir su conocimiento con paciencia y calidez. Tu amor por las ciencias naturales inspira a quienes te rodean, y tu forma tranquila, respetuosa y responsable de ver la vida te convierte en un ejemplo para todos nosotros.</p>
-      <p>Eres de esos entrenadores que no necesitan gritar para liderar: basta tu ejemplo. Gracias por ser el hermano mayor amable y confiable que todos quisiéramos tener a nuestro lado en cualquier aventura, ¡como un buen equipo Pokémon!</p>
-      <p>Que este nuevo año esté lleno de descubrimientos, curiosidad infinita y muchas victorias, tanto en el laboratorio como en la vida.</p>
+      <p>Tío,</p>
+      <p>Hoy quiero celebrarte no solo como mi tío, sino como el <strong>amigo</strong> que siempre ha estado ahí. Eres de esas personas que entran al ring de la vida con la frente en alto, con la fuerza de un campeón y la nobleza de saber cuándo dar la mano en lugar de un golpe.</p>
+      <p>Te tengo un cariño enorme, un respeto que se ha ganado con cada consejo, cada momento compartido y cada muestra de apoyo. Confío en ti como se confía en un verdadero campeón: sabiendo que siempre vas a estar en tu esquina, listo para pelear por los que quieres.</p>
+      <p>Que este nuevo año te traiga solo victorias, salud y muchos momentos para seguir celebrando junto a quienes te admiramos tanto.</p>
     </div>
 
     <div class="badges">
-      <span class="badge"> Te quiero mucho Ramon</span>
-      <span class="badge">Gracias por todo</span>
+      <span class="badge">🏆 Campeón indiscutible</span>
+      <span class="badge">💪 Mi ejemplo a seguir</span>
+      <span class="badge">🤝 Confianza total</span>
     </div>
 
-    <p class="signature">Con cariño, Alaina Garcia 💛</p>
-    <footer class="small-note">¡Que la Pokédex de tu vida siga llenándose de momentos increíbles!</footer>
+    <p class="signature">Con cariño y admiración, Alaina 💛</p>
+    <footer class="small-note">¡Que suene tu música de entrada porque hoy es tu noche, campeón!</footer>
   </div>
 </div>
 
 <script>
-  const pokeballBtn = document.getElementById('pokeballBtn');
-  const pokeball = document.getElementById('pokeball');
+  const beltBtn = document.getElementById('beltBtn');
+  const belt = document.getElementById('belt');
   const card = document.getElementById('card');
   const container = document.getElementById('container');
 
   function launchConfetti() {
-    const colors = ['#e3350d', '#ffd700', '#2e7d32', '#3b4cca', '#ffffff'];
+    const colors = ['#ffd700', '#c8102e', '#1e3a8a', '#ffffff'];
     const shapes = ['●', '★', '▲', '■'];
     for (let i = 0; i < 60; i++) {
       const piece = document.createElement('div');
@@ -310,11 +339,11 @@
     }
   }
 
-  pokeballBtn.addEventListener('click', () => {
-    pokeball.classList.add('opened');
+  beltBtn.addEventListener('click', () => {
+    belt.classList.add('opened');
     launchConfetti();
     setTimeout(() => {
-      container.classList.add('hidden-ball');
+      container.classList.add('hidden-belt');
       card.classList.add('show');
       launchConfetti();
     }, 500);
